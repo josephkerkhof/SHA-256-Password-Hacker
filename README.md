@@ -6,7 +6,7 @@ Given a byte array hashed with SHA-256 encryption, brute force check all possibl
 
 ## Purpose of the Problem
 
-This supplemental project in my Data Structures (CS 271) course was given to illustrate how poor brute force algorithms are in solving problems. In this case however, it is the only solution. At the time of my solution **no other Computer Science student at UW-Oshkosh had discovered a way to crack the password**.
+The supplemental project in my Data Structures (CS 271) course was given to illustrate how poor brute force algorithms are in solving problems. In this case however, it is the only solution. At the time of completing my solution **no other Computer Science student at UW-Oshkosh had discovered a way to crack the password**.
 
 ## Problem Details
 
@@ -27,16 +27,20 @@ _~98 septendecillion_ or 98,079,714,615,416,886,934,934,209,737,619,787,751,599,
 
 ### The Time Constraint
 
-After doing some rough estimations, having a single threaded process brute force thru 98 septendecillion combination would take roughly _5.5 years_ to get to the last possible combination. This would obviously work, but take far too long since I was bound by a semester due date. I needed a way to speed things up.
+After doing some rough estimations, I discovered a single threaded brute force process thru 98 septendecillion combinations would take roughly _5.5 years_ to get to the last possible combination. This would obviously work, but take far too long since I was bound by a semester due date. I needed a way to speed things up.
 
 ### Splitting the Problem into Chunks
 
-Instead of having one thread check all possibilities, I could solve the problem with many threads each checking a separate portion of the brute force. When I was solving this problem, our Computer Science Linux lab had 32 computers each with a quad-core processor. I decided to split the problem into 124 chunks utilizing 31 computers each running 4 threads - one for each processor. Using this method I reduced the runtime of the entire process from 5.5 years to **just over 2 weeks**, much more doable in a semester's worth of time.
+Instead of having one thread check all possibilities, I could solve the problem with many threads each checking a separate portion of the brute force. When I was solving this problem, our Computer Science Linux lab had 32 computers each with a quad-core processor. I decided to split the problem into 124 chunks utilizing 31 computers each running 4 threads - one for each core. Using this method I reduced the runtime of the entire process from 5.5 years to **just over 2 weeks**, which is doable in a semester's worth of time.
 
 ### The PasswordHacker.java file
 
-When compiled and run, this program writes 124 different Java programs to a separate file. There are 4 in a group - each for a different machine. Each group also gets a separate shell script written to make starting the threads on each machine easier.
+When compiled and run, this program writes 124 different Java programs, each to a separate file. There are 4 programs in a group, each for a different machine. Each group also gets a separate shell script allowing the machines to start the threads easier.
 
 ### Executing the Solution
 
-Each day I would SSH into each Linux Lab computer and ensure the process was running with a [nice value of 19](https://en.wikipedia.org/wiki/Nice_%28Unix%29).
+Each day I would SSH into each Linux Lab computer and ensure the process was running with a [nice value of 19](https://en.wikipedia.org/wiki/Nice_%28Unix%29). After this, it was just a matter of waiting for the un-hashed password to be written to a file.
+
+## Great Success!
+
+After about two weeks of waiting and checking my processes daily, my patience paid off and I found the password: DSI5FUN1.
